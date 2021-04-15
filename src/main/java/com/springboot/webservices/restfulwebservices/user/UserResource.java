@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class UserResource {
     }
 
     @PostMapping("/users")
-    public ResponseEntity createUser(@RequestBody User user) {
+    public ResponseEntity createUser(@Valid @RequestBody User user) {
         User savedUser = service.save(user);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -38,8 +39,11 @@ public class UserResource {
     }
 
     @DeleteMapping("/users/{id}")
-    public void deleteUser(@PathVariable Integer id) {
-        service.deleteOne(id);
+    public void deleteUserById(@PathVariable Integer id) {
+        User user = service.deleteOneById(id);
+        if(user == null) {
+            throw new UserNotFoundException("id: " + id);
+        }
     }
 
     @DeleteMapping("/users")
