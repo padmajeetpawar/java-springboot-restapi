@@ -1,5 +1,8 @@
 package com.springboot.webservices.restfulwebservices.user;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Past;
@@ -7,6 +10,7 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
+@ApiModel(description = "All details about USER")
 public class User {
 
     @Max(value = 2)
@@ -15,6 +19,7 @@ public class User {
     @Size(min = 2, message = "Name should have at least 2 character")
     private String name;
 
+    @ApiModelProperty(notes = "Birthdate should not be past date")
     private String birthDate;
 
     public User(Integer id, String name, String birthDate) {
