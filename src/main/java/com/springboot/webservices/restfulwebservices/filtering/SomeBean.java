@@ -1,9 +1,8 @@
 package com.springboot.webservices.restfulwebservices.filtering;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import net.minidev.json.annotate.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
-@JsonIgnoreProperties(value = {"password"})
+@JsonFilter("someBeanFilter")
 public class SomeBean {
 
 
