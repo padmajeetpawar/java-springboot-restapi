@@ -1,5 +1,6 @@
 package com.springboot.webservices.restfulwebservices.user;
 
+import jdk.dynalink.beans.StaticClass;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -11,7 +12,10 @@ import java.util.List;
 public class UserDaoService {
 
     public static List<User> userDetails = new ArrayList();
-    private static int userIdCount = 0;
+    static {
+        userDetails.add(new User(1, "Padmajeet", "04/24/1994"));
+    }
+    private static int userIdCount = 1;
 
     public User findOne(@PathVariable Integer id) {
         for(User user : userDetails) {
