@@ -13,9 +13,10 @@ public class UserDaoService {
 
     public static List<User> userDetails = new ArrayList();
     static {
-        userDetails.add(new User(1, "Padmajeet", "04/24/1994"));
+        userDetails.add(new User(1, "abc", "01/01/2001"));
+        userDetails.add(new User(2, "xyz", "02/02/2002"));
     }
-    private static int userIdCount = 1;
+    private static int userIdCount = 2;
 
     public User findOne(@PathVariable Integer id) {
         for(User user : userDetails) {
