@@ -14,8 +14,9 @@ public class UserDaoService {
     public static List<User> userDetails = new ArrayList();
     static {
         userDetails.add(new User(1, "Padmajeet", "04/24/1994"));
+        userDetails.add(new User(2, "Priyanka", "01/15/1996"));
     }
-    private static int userIdCount = 1;
+    private static int userIdCount = 2;
 
     public User findOne(@PathVariable Integer id) {
         for(User user : userDetails) {
