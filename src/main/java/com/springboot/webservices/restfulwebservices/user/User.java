@@ -3,6 +3,11 @@ package com.springboot.webservices.restfulwebservices.user;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.annotation.processing.Generated;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Past;
@@ -11,9 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ApiModel(description = "All details about USER")
+@Entity
 public class User {
 
-    @Max(value = 2)
+    @Id
+    @GeneratedValue
     private Integer id;
 
     @Size(min = 2, message = "Name should have at least 2 character")
@@ -22,7 +29,16 @@ public class User {
     @ApiModelProperty(notes = "Birthdate should not be past date")
     private String birthDate;
 
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
+
+    protected User() {
+
+    }
+
     public User(Integer id, String name, String birthDate) {
+        super();
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
@@ -50,5 +66,13 @@ public class User {
 
     public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }
